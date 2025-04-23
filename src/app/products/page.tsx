@@ -1,3 +1,4 @@
+import ProductCard from "@/components/ProductCard";
 import { stripe } from "@/lib/stripe";
 
 export default async function ProductsPage() {
@@ -10,7 +11,11 @@ export default async function ProductsPage() {
       <h1 className="text-3xl font-bold leading-none tracking-tight text-foreground text-center mb-8">
         All Products
       </h1>
-      
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 container mx-auto px-4">
+        {products.data.map((product) => (
+          <ProductCard key={product.id} product={product}></ProductCard>
+        ))}
+      </div>
     </div>
   );
 }
