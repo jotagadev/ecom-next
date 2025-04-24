@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 interface Props {
   products: Stripe.Product[];
@@ -35,7 +36,7 @@ export default function Carousel({ products }: Props) {
           <h2 className="text-3xl font-bold text-white-900 text-center md:text-left text-shadow">{currentProduct.name}</h2>
           <p>{currentProduct.description}</p>
           <p>{"R$ "}{(currentPrice.unit_amount || 0) / 100}{",00"}</p>
-          <Button variant={"secondary"} className="absolute top-65">Comprar</Button>
+          <Link href={`/products/${currentProduct.id}`}><Button variant={"secondary"} className="absolute top-65 cursor-pointer">Comprar</Button></Link>
         </div>
         
         </div>

@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`flex min-h-full flex-col bg-white`}
       >
         <Navbar />
-        <main className="flex-grow container mx-auto py-8">
+        <main className="flex-grow container mx-auto py-4">
         {children}
         </main>
       </body>

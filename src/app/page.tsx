@@ -12,18 +12,18 @@ export default async function Home() {
   });
   return (
     <div>
-      <section className="bg-neutral-100 py-8 sm:py-12 shadow-2xl rounded-lg">
+      <section className="bg-neutral-100 py-8 sm:py-12 shadow-2xs rounded-lg">
   <div className="container  flex flex-col md:flex-row items-center justify-around gap-8 px-4">
     
     <div className="max-w-md flex flex-col items-center md:items-start">
       <h1 className="text-3xl font-bold text-gray-800 text-center md:text-left">
-        Welcome to our Sports Nutrition Store
+        Sports Nutrition Store
       </h1>
       <p className="text-gray-600 mt-2 text-left">
-        Boost your performance with our premium supplements. Explore our range of products designed to help you achieve your fitness goals.
+      Potencialize seu desempenho com nossos suplementos premium. Explore nossa linha de produtos desenvolvidos para ajudar você a alcançar seus objetivos nos treinos.
       </p>
       <Button variant="default" className="mt-4">
-        <Link href="/products">See our products</Link>
+        <Link href="/products">Veja nossos produtos</Link>
       </Button>
     </div>
 

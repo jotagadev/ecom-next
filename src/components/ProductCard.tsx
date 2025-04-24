@@ -14,9 +14,9 @@ export default function ProductCard({product}: Props) {
     const image = product.images[0];
 
     return (
-        <Card >
+        <Card className='bg-white shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out'>
             {product.images && product.images[0] &&
-            <div className='relative w-full h-70 overflow-hidden rounded-lg shadow-lg mb-4'>
+            <div className='relative w-auto h-50 overflow-hidden rounded-lg shadow-lg mb-4 m-5'>
             <Image src={image} fill alt={product.name}>
                 
             </Image>
@@ -28,7 +28,7 @@ export default function ProductCard({product}: Props) {
             <CardContent>
                 {price && 
                 <p className=' font-bold'>{"R$ "}{(price.unit_amount || 0) / 100}{",00"}</p>}
-                <Button variant={"secondary"} className='mt-4'><Link href={`/products/${product.id}`}>Comprar</Link></Button>
+                <Button variant={"default"} className='mt-4'><Link href={`/products/${product.id}`}>Comprar</Link></Button>
             </CardContent>
         </Card>
     )}
