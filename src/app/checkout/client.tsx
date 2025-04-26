@@ -7,8 +7,13 @@ import { checkoutAction } from "./checkout-action";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { githubLogin, googleLogin } from "@/lib/actions/auth";
+import { AuthSession } from "@/types";
 
-export default function CheckoutClient({session} : any) {
+interface CheckoutClientProps {
+  session: AuthSession | null | undefined;
+}
+
+export default function CheckoutClient({ session } : CheckoutClientProps) {
   const { items, removeItem, addItem } = useCartStore();
   const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
