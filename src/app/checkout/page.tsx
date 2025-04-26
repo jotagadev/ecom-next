@@ -1,10 +1,12 @@
-import { getServerSession } from "next-auth";
+
 import CheckoutClient from "./client";
-import { authconfig } from "@/auth";
+import { auth } from "@/auth";
 
 
 export default async function checkoutPage () {
-    const session = await getServerSession(authconfig)
+    const session = await auth()
+    
+    console.log(session) //APENAS PARA TESTE (RETIRAR)
 
     return (
         <CheckoutClient session = {session}/>

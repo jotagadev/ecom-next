@@ -6,9 +6,9 @@ import { useCartStore } from "../store/store";
 import { checkoutAction } from "./checkout-action";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import { githubLogin } from "@/lib/actions/auth";
+import { githubLogin, googleLogin } from "@/lib/actions/auth";
 
-export default function CheckoutClient({session}) {
+export default function CheckoutClient({session} : any) {
   const { items, removeItem, addItem } = useCartStore();
   const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -75,10 +75,10 @@ export default function CheckoutClient({session}) {
         <div className="text-center mt-4 flex flex-col items-center">
           <p className="text-lg font-semibold">Faça login para continuar a compra</p>
           <div className="flex gap-4 mt-4">
-          <Button variant="default" className="mt-2 bg-red-800 cursor-pointer hover:bg-red-700" onClick={githubLogin}>
+          <Button variant="default" className="mt-2 bg-red-800 cursor-pointer hover:bg-red-700" onClick={() => googleLogin()}>
             Login com o Google <FaGoogle className="inline ml-2" />
           </Button>
-          <Button variant="default" className="mt-2 cursor-pointer">
+          <Button variant="default" className="mt-2 cursor-pointer" onClick={() => githubLogin()}>
             Login com o Github <FaGithub className="inline ml-2" />
           </Button>
           </div>
