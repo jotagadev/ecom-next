@@ -36,13 +36,13 @@ export  default function Navbar ()  {
         <div className="hidden md:flex space-x-6">
         <Button variant={"link"}>
               <Link href="/">
-                Home
+                Página inicial
               </Link>
               </Button>
             
             <Button variant={"link"}>
               <Link href="/products">
-                Products
+                Produtos
               </Link>
               </Button>
            
@@ -80,14 +80,14 @@ export  default function Navbar ()  {
             <li>
               <Button variant={"link"}>
               <Link href="/">
-                Home
+                Página inicial
               </Link>
               </Button>
             </li>
             <li>
             <Button variant={"link"}>
               <Link href="/products">
-                Products
+                Produtos
               </Link>
               </Button>
             </li>
