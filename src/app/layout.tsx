@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { auth } from "@/auth";
+import { AuthSession } from "@/types";
 
 
 export const metadata: Metadata = {
@@ -8,19 +10,23 @@ export const metadata: Metadata = {
   description: "Projeto de E-commerce - Jotagadev",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const session = await auth() as AuthSession
+
+
   return (
     
     <html lang="pt-BR">
       <body
-        className={`flex min-h-full flex-col bg-white`}
+        className={`h-screen bg-white w-screen max-h-screen flex flex-col`}
       >
-        <Navbar />
-        <main className="flex-grow container mx-auto py-4">
+        <Navbar session={session}/>
+        <main className="container mx-auto py-4">
         {children}
         </main>
       </body>

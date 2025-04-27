@@ -10,6 +10,6 @@ export default async function checkoutPage () {
     console.log(session) //APENAS PARA TESTE (RETIRAR)
 
     return (
-        <CheckoutClient session = {session}/>
+        <CheckoutClient  session={session}/>
     )
 }

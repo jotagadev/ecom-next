@@ -26,7 +26,7 @@ export default function ProductDetails({product} : {product: Stripe.Product}) {
 
     return (
         
-        <div className=" flex-col md:flex-row flex items-center justify-center h-screen max-h-screen max-w-screen gap-10">
+        <div className=" flex-col md:flex-row flex items-center justify-center  h-200 max-w-screen gap-10">
             <div className='flex flex-col max-w-100'>
                 <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
                 <p className="text-lg mb-4">{product.description}</p>
