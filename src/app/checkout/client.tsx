@@ -93,7 +93,7 @@ export default function CheckoutClient({ session } : CheckoutClientProps) {
           <p className="text-lg font-semibold">Faça login para continuar a compra</p>
           <div className="flex flex-col gap-4 mt-4">
           
-          <AuthCard></AuthCard>
+          <AuthCard status={false}></AuthCard>
           
           </div>
         </div>

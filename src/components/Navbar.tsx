@@ -14,6 +14,16 @@ import { Avatar} from "./ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { logout } from "@/lib/actions/auth";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import AuthCard from "./auth/AuthCard";
+
 interface Props {
   session: AuthSession| null | undefined;
 }
@@ -83,12 +93,38 @@ export  default function Navbar ({session} : Props)  {
         </div>):
         (
           <div className="hidden md:flex flex-row gap-2">
-          <Button variant={"default"} className="hidden md:block cursor-pointer">
+            
+          <Dialog>
+            <DialogTrigger asChild>
+            <Button variant={"default"} className="hidden md:block cursor-pointer">
             Login 
           </Button>
-          <Button variant={"secondary"} className="hidden md:block cursor-pointer">
-          Registrar-se 
-        </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Login</DialogTitle>
+                <DialogDescription>
+                </DialogDescription>
+              </DialogHeader>
+              <AuthCard status={true} />
+            </DialogContent>
+          </Dialog> 
+          
+          <Dialog>
+            <DialogTrigger asChild>
+            <Button variant={"secondary"} className="hidden md:block cursor-pointer">
+            Registrar-se
+          </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Login</DialogTitle>
+                <DialogDescription>
+                </DialogDescription>
+              </DialogHeader>
+              <AuthCard status={false} />
+            </DialogContent>
+          </Dialog> 
         </div>
         )}
           

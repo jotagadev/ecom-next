@@ -8,8 +8,12 @@ import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { githubLogin, googleLogin } from "@/lib/actions/auth";
 
-export default function AuthCard(){
-    const [haveAccount, setHaveAccount] = useState(false);
+type AuthCardProps = {
+    status: boolean;
+}
+
+export default function AuthCard({ status } : AuthCardProps){
+    const [haveAccount, setHaveAccount] = useState(status);
 
 
 return (
