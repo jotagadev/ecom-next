@@ -43,19 +43,19 @@ export default function RegisterForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-sm mx-auto">
       <div>
         <label htmlFor="name">Nome:</label>
-        <input id="name" {...register("name")} className="border p-2 w-full" />
+        <input placeholder="Seu nome" id="name" {...register("name")} className="rounded-lg bg-neutral-100 p-2 w-full" />
         {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
       </div>
 
       <div>
         <label htmlFor="email">Email:</label>
-        <input id="email" {...register("email")} className="border p-2 w-full" />
+        <input placeholder="seuemail@email.com" id="email" {...register("email")} className="rounded-lg bg-neutral-100 p-2 w-full" />
         {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
       </div>
 
       <div>
         <label htmlFor="password">Senha:</label>
-        <input id="password" type="password" {...register("password")} className="border p-2 w-full" />
+        <input placeholder="Crie uma senha (mínimo de 6 caracteres)" id="password" type="password" {...register("password")} className="rounded-lg bg-neutral-100 p-2 w-full" />
         {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
       </div>
 
@@ -64,5 +64,6 @@ export default function RegisterForm() {
         Enviar
       </Button>
     </form>
+    
   );
 }
