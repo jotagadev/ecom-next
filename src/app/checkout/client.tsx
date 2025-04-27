@@ -7,6 +7,7 @@ import { checkoutAction } from "./checkout-action";
 import { AuthSession } from "@/types";
 import AuthCard from "@/components/auth/AuthCard";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CheckoutClientProps {
   session: AuthSession | null | undefined;
@@ -21,8 +22,9 @@ export default function CheckoutClient({ session } : CheckoutClientProps) {
 
   if (items.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-3xl font-bold mb-4">Seu carrinho está vazio!</h1>
+      <div className="container mx-auto px-4 py-8 text-center h-150 flex flex-col items-center justify-center">
+        <h1 className="text-3xl font-bold mb-4 text-shadow-2xs text-neutral-800">Seu carrinho está vazio!</h1>
+        <Link href="/products"><Button variant={"default"} className="cursor-pointer" >Voltar às compras</Button></Link>
       </div>
     );
   }
