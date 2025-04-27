@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
-import { userSchema } from "@/lib/zod";
+import { registerUserSchema } from "@/lib/zod";
 
 
 // Rota POST para cadastro de usuário
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { name, email, password } = userSchema.parse(body);
+    const { name, email, password } = registerUserSchema.parse(body);
 
     const emailExists = await db.user.findUnique({
       where: {

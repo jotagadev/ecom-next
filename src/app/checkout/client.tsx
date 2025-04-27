@@ -8,6 +8,7 @@ import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { githubLogin, googleLogin } from "@/lib/actions/auth";
 import { AuthSession } from "@/types";
+import RegisterForm from "@/components/auth/RegisterForm";
 
 interface CheckoutClientProps {
   session: AuthSession | null | undefined;
@@ -83,13 +84,19 @@ export default function CheckoutClient({ session } : CheckoutClientProps) {
       {!session &&(
         <div className="text-center mt-4 flex flex-col items-center">
           <p className="text-lg font-semibold">Faça login para continuar a compra</p>
-          <div className="flex gap-4 mt-4">
-          <Button variant="default" className="mt-2 bg-red-800 cursor-pointer hover:bg-red-700" onClick={() => googleLogin()}>
-            Login com o Google <FaGoogle className="inline ml-2" />
-          </Button>
-          <Button variant="default" className="mt-2 cursor-pointer" onClick={() => githubLogin()}>
-            Login com o Github <FaGithub className="inline ml-2" />
-          </Button>
+          <div className="flex flex-col gap-4 mt-4">
+              <div className="flex flex-row gap-2">
+                  <Button variant="default" className="mt-2 bg-red-800 cursor-pointer hover:bg-red-700" onClick={() => googleLogin()}>
+                    Login com o Google <FaGoogle className="inline ml-2" />
+                  </Button>
+
+                  <Button variant="default" className="mt-2 cursor-pointer" onClick={() => githubLogin()}>
+                  Login com o Github <FaGithub className="inline ml-2" />
+                  </Button>
+              </div>
+          
+          <RegisterForm />
+          
           </div>
         </div>
       )}
