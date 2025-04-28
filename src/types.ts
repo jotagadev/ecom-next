@@ -3,6 +3,8 @@ export interface AuthSession {
         name: string;
         email: string;
         image: string;
+        admin: boolean;
+        id: string;
     };
     expires: string; 
 }

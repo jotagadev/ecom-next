@@ -17,6 +17,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  admin         Boolean         @default(false)
 
  
   createdAt DateTime @default(now())
