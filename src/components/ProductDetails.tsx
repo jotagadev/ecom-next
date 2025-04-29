@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Stripe from 'stripe'
 import { Button } from './ui/button';
 import { useCartStore } from '@/app/store/store';
+import { FaCartShopping } from "react-icons/fa6";
+import Link from 'next/link';
 
 export default function ProductDetails({product} : {product: Stripe.Product}) {
 
@@ -41,7 +43,11 @@ export default function ProductDetails({product} : {product: Stripe.Product}) {
                 <Button className='!w-auto cursor-pointer' onClick={onAddItem}>+</Button>
                 </div>
                 </div>
-                
+                {
+                  quantity > 0 && (
+                    <Link href={"/checkout"}><Button className='max-w-fit w-auto mt-5 cursor-pointer' variant={"outline"}>Finalizar compra <FaCartShopping /></Button></Link>
+                  )
+                }
             </div>
             <div>
                 <Image src={image} alt={product.name} className=" rounded-2xl shadow-2xl w-2xl h-auto mb-4 object-fill" width={1024} height={768}/>

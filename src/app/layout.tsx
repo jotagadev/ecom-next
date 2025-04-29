@@ -3,7 +3,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { auth } from "@/auth";
 import { AuthSession } from "@/types";
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ecom",
@@ -21,7 +23,7 @@ export default async function RootLayout({
 
   return (
     
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={inter.className}>
       <body
         className={`h-screen bg-white w-screen max-h-screen flex flex-col`}
       >

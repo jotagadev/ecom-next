@@ -32,7 +32,7 @@ export default function CheckoutClient({ session } : CheckoutClientProps) {
   const nomeAbv = session?.user.name.split(" ")[0];
 
   return (
-    <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row items-center justify-center h-full lg:gap-30 lg:mt-20">
+    <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row items-center justify-center h-full lg:gap-30">
       <div>
       <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
       <Card className=" mx-auto mb-8 lg:w-150">
@@ -84,7 +84,7 @@ export default function CheckoutClient({ session } : CheckoutClientProps) {
       {session &&<form action={checkoutAction} className="max-w-md mx-auto">
         <input type="hidden" name="items" value={JSON.stringify(items)} />
         <p className="text-lg font-semibold mx-auto text-center">{`Você está quase lá, ${nomeAbv}!
-          Vamos botar o shape?`} </p>
+          Pronto para acelerar seus resultados?`} </p>
         <Button type="submit" variant="default" className="w-full cursor-pointer mt-10">
           Ir para o pagamento
         </Button>

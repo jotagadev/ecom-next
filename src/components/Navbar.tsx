@@ -49,7 +49,7 @@ export  default function Navbar ({session} : Props)  {
     <nav className="sticky top-0 z-50 bg-white shadow">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <div className="flex items-center-safe space-x-10">
-        <Link href="/" className="text-2xl font-bold">
+        <Link href="/" className="text-2xl font-bold text-shadow-2xs">
           Sports Nutrition
         </Link>
         <div className="hidden md:flex space-x-6">
@@ -70,6 +70,14 @@ export  default function Navbar ({session} : Props)  {
                 Checkout
               </Link>
               </Button>
+
+              {session && session.user.admin && (
+                <Button variant={"link"}>
+                <Link href="/admin">
+                  Admin
+                </Link>
+                </Button>
+              )}
               </div>
         </div>
         
@@ -84,7 +92,12 @@ export  default function Navbar ({session} : Props)  {
             )}
           </Link>
 
-          {session ? (<div className="flex flex-row align-center justify-center gap-4">
+          { 
+          // Caso a sessão esteja ativa, exibe o nome do usuario e o botão de logout
+          // Caso contrário, exibe o botão de login e registrar-se, dentro do Dialog
+          }
+
+          {(session) ? (<div className=" flex-row align-center justify-center gap-4 hidden md:flex">
         <Avatar className="w-10 h-10">
           <AvatarImage src={session?.user.image}></AvatarImage>
         </Avatar>
@@ -142,7 +155,7 @@ export  default function Navbar ({session} : Props)  {
         </div>
       </div>
       {mobileOpen && (
-        <nav className="md:hidden bg-white shadow-md">
+        <nav className="md:hidden bg-white shadow-md flex flex-col items-center transition-transform duration-300 ease-in-out">
           <ul className="flex flex-col p-4 space-y-2">
             <li>
               <Button variant={"link"}>
@@ -165,7 +178,59 @@ export  default function Navbar ({session} : Props)  {
               </Link>
               </Button>
             </li>
+            {session && session.user.admin && (
+              <li>
+                <Button variant={"link"}>
+                <Link href="/admin">
+                  Admin
+                </Link>
+                </Button>
+                </li>
+              )}
           </ul>
+          {(session) ? (<div className=" flex-row align-center justify-center gap-4 flex md:hidden">
+        <Avatar className="w-10 h-10">
+          <AvatarImage src={session?.user.image}></AvatarImage>
+        </Avatar>
+        <span className="my-auto font-semibold text-shadow-2xs">{session?.user.name}</span>
+        <Button className="p-1 cursor-pointer" variant={"default"} onClick={() => logout()}>Logout</Button>
+        </div>):
+        (
+          <div className="flex md:hidden flex-row gap-2 p-4">
+            
+          <Dialog>
+            <DialogTrigger asChild>
+            <Button variant={"default"} className="block md:hidden cursor-pointer">
+            Login 
+          </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-[400px]">
+              <DialogHeader className="">
+                <DialogTitle>Login</DialogTitle>
+                <DialogDescription>
+                </DialogDescription>
+              </DialogHeader>
+              <AuthCard status={true} />
+            </DialogContent>
+          </Dialog> 
+          
+          <Dialog>
+            <DialogTrigger asChild>
+            <Button variant={"secondary"} className="block md:hidden cursor-pointer">
+            Registrar-se
+          </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-[400px]">
+              <DialogHeader>
+                <DialogTitle>Login</DialogTitle>
+                <DialogDescription>
+                </DialogDescription>
+              </DialogHeader>
+              <AuthCard status={false} />
+            </DialogContent>
+          </Dialog> 
+        </div>
+        )}
         </nav>
       )}
     </nav>
