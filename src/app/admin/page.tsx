@@ -3,6 +3,7 @@ import { AuthSession } from "@/types";
 import { stripe } from "@/lib/stripe";
 import AdminProductCard from "@/components/admin/AdminProductCard";
 import CreateProductModal from "@/components/admin/CreateProductModal";
+import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
   const session = (await auth()) as AuthSession;
@@ -11,13 +12,14 @@ export default async function AdminPage() {
     expand: ["data.default_price"],
   });
 
-  
-
   if (!session) {
-    return <p>Você não está autenticado.</p>;
+    redirect("/")
   }
 
-  if (session.user.admin) {
+  if(!session.user.admin) {
+    redirect("/")
+  }
+  
     return (
       <div className="flex flex-col gap-5 ">
         <h1 className="self-center font-bold text-xl text-shadow-2xs">
@@ -34,7 +36,5 @@ export default async function AdminPage() {
         </div>
       </div>
     );
-  } else {
-    return <p>Você não tem permissão para acessar esta página.</p>;
-  }
-}
+  } 
+
