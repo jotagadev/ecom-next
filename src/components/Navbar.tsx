@@ -188,7 +188,7 @@ export  default function Navbar ({session} : Props)  {
                 </li>
               )}
           </ul>
-          {(session) ? (<div className=" flex-row align-center justify-center gap-4 flex md:hidden">
+          {(session) ? (<div className=" flex-row align-center justify-center gap-4 flex md:hidden p-2">
         <Avatar className="w-10 h-10">
           <AvatarImage src={session?.user.image}></AvatarImage>
         </Avatar>

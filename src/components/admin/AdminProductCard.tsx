@@ -56,7 +56,7 @@ export default function AdminProductCard({ product }: Props) {
           <AlertDialog>
       <AlertDialogTrigger 
             
-            className="flex items-center cursor-pointer text-sm absolute z-10 right-0 -top-1 hover:bg-red-700 size:min bg-red-600 p-1 rounded-sm text-white">
+            className="flex items-center cursor-pointer text-sm absolute z-10 right-0 -top-1 hover:bg-red-700 size:min bg-gray-950 p-1 rounded-sm text-white">
             
           
             <FaTrashAlt className="text-lg" /></AlertDialogTrigger>
@@ -76,7 +76,7 @@ export default function AdminProductCard({ product }: Props) {
 
       
       {product.images && product.images[0] && (
-        <div className="relative w-50 h-50 overflow-hidden rounded-lg shadow-lg ">
+        <div className="relative w-50 h-40 overflow-hidden rounded-lg shadow-lg ">
           <Image src={image} fill alt={product.name}></Image>
         </div>
       )}
