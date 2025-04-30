@@ -18,7 +18,7 @@ export default function UpdateProductModal ({ product } : Props) {
         <DialogTrigger asChild>
         <Button
                     variant={"default"}
-                    className="flex items-center gap-2  cursor-pointer"
+                    className="flex items-center gap-2 cursor-pointer size-min"
                   >
                     <FaEdit className="text-lg" /> Editar
                   </Button>

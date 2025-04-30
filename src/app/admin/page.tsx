@@ -7,6 +7,7 @@ import CreateProductModal from "@/components/admin/CreateProductModal";
 export default async function AdminPage() {
   const session = (await auth()) as AuthSession;
   const products = await stripe.products.list({
+    active: true,
     expand: ["data.default_price"],
   });
 

@@ -108,7 +108,9 @@ export async function DELETE(req: Request) {
     }
 
     try {
-        const product = await stripe.products.del(id)
+        const product = await stripe.products.update(id,{
+            active: false,
+        })
 
         return new Response(JSON.stringify({ product }), {
             status: 200

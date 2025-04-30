@@ -6,6 +6,7 @@ import Link from "next/link";
 
 export default async function Home() {
   const products = await stripe.products.list({
+    active: true,
     expand: ['data.default_price'],
     limit:5,
     

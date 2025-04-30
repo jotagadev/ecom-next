@@ -2,7 +2,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } 
 import { Button } from "../ui/button";
 import { DialogHeader } from "../ui/dialog";
 import CreateProductForm from "./CreateProductForm";
-import { FaPlusSquare } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 
 
@@ -10,8 +10,8 @@ export default function CreateProductModal () {
     return (
         <Dialog>
         <DialogTrigger asChild>
-        <Button variant={"default"} className="max-w-fit w-auto self-center cursor-pointer">
-          Adicionar Produto <FaPlusSquare></FaPlusSquare>
+        <Button variant={"outline"} className="max-w-fit w-auto self-center cursor-pointer font-semibold">
+          Adicionar Produto <FaPlus className="size-2"></FaPlus>
         </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
