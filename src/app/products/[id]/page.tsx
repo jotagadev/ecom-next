@@ -4,6 +4,7 @@ import { stripe } from "@/lib/stripe";
 export default async function ProductPage({params}: {params: Promise<{id: string}>}){
 
     const products = await stripe.products.list({
+        active: true,
         expand: ["data.default_price"],
     });
 
