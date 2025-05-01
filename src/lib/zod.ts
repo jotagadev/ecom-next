@@ -22,7 +22,7 @@ export const createProductSchema = z.object({
   price: z
     .number({ invalid_type_error: "O preço deve ser um número" })
     .min(0.01, "O preço deve ser maior que zero"),
-  image: z.string().url("A imagem deve ser uma URL válida"), 
+  image: z.string().optional(), // opcional apenas para não dar erro de tipo, pois a imagem não é validada pelo zod
 })
 
 

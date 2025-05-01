@@ -5,11 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { createProductSchema, ProductFormData } from "@/lib/zod";
 import { Button } from "../ui/button";
-
+import { supabase } from "@/lib/supabase";
+import Image from "next/image";
+import { FaCloudUploadAlt, FaTrash, FaTrashAlt } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function CreateProductForm() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const router = useRouter();
 
   const {
     register,
@@ -20,8 +25,12 @@ export default function CreateProductForm() {
     resolver: zodResolver(createProductSchema),
   });
 
-  const onSubmit = async (data: ProductFormData) => { 
-
+  const onSubmit = async (data: ProductFormData) => {
+    if (!imageUrl) {
+      setServerError("A imagem é obrigatória.");
+      return;
+    }
+    data = {...data, image: imageUrl };
     try {
       const response = await fetch("/api/products", {
         method: "POST",
@@ -30,7 +39,6 @@ export default function CreateProductForm() {
         },
         body: JSON.stringify(data),
       });
-
       const responseData = await response.json();
 
       if (!response.ok) {
@@ -39,17 +47,70 @@ export default function CreateProductForm() {
       }
 
       console.log("Produto criado com sucesso:", responseData);
-      setServerError(null); 
+      setServerError(null);
       setSuccessMessage("Produto criado com sucesso!");
-      reset(); 
+      reset();
+      setTimeout(() => {
+        router.refresh(); // Redireciona depois de 1 segundo
+      }, 1000);
     } catch (error) {
       console.error("Erro ao registrar o produto:", error);
       setServerError("Erro ao registrar o produto. Tente novamente.");
     }
   };
 
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = event.target.files?.[0];
+      const fileExt = file?.name.split(".").pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+      const filePath = `products/images/${fileName}`;
+
+      if (!file) {
+
+        setImageUrl(null);
+
+        return null;
+      }
+
+      const { error } = await supabase.storage
+        .from("products-images")
+        .upload(filePath, file);
+
+
+      if (error) {
+        setServerError(error.message)
+      }
+
+      console.log("Imagem enviada com sucesso");
+
+      const { data: publicUrlData } = supabase.storage
+        .from("products-images")
+        .getPublicUrl(filePath);
+      const publicUrl = publicUrlData.publicUrl;
+
+      if (publicUrl) {
+        setImageUrl(publicUrl);
+        console.log("URL da imagem:", publicUrl);
+        setServerError(null);
+        return publicUrl;
+      } else {
+        throw new Error("Erro ao obter a URL da imagem.");
+      }
+    } catch (error) {
+      console.error("Erro ao fazer upload da imagem:", error);
+      setServerError(`Erro ao fazer upload da imagem. Tente novamente.`);
+      console.log(error);
+      console.log(imageUrl);
+    }
+  };
+
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-sm mx-auto">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-4 max-w-sm mx-auto"
+    >
       <div>
         <label htmlFor="name">Nome:</label>
         <input
@@ -58,7 +119,9 @@ export default function CreateProductForm() {
           {...register("name")}
           className="rounded-lg bg-neutral-100 p-2 w-full"
         />
-        {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+        {errors.name && (
+          <p className="text-red-500 text-sm">{errors.name.message}</p>
+        )}
       </div>
 
       <div>
@@ -69,7 +132,9 @@ export default function CreateProductForm() {
           {...register("description")}
           className="rounded-lg bg-neutral-100 p-2 w-full"
         />
-        {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
+        {errors.description && (
+          <p className="text-red-500 text-sm">{errors.description.message}</p>
+        )}
       </div>
 
       <div>
@@ -80,7 +145,9 @@ export default function CreateProductForm() {
           {...register("category")}
           className="rounded-lg bg-neutral-100 p-2 w-full"
         />
-        {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}
+        {errors.category && (
+          <p className="text-red-500 text-sm">{errors.category.message}</p>
+        )}
       </div>
 
       <div>
@@ -90,33 +157,66 @@ export default function CreateProductForm() {
           id="price"
           type="number"
           step="0.01"
-          {...register("price", { valueAsNumber: true })} 
+          {...register("price", { valueAsNumber: true })}
           className="rounded-lg bg-neutral-100 p-2 w-full"
         />
-        {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
+        {errors.price && (
+          <p className="text-red-500 text-sm">{errors.price.message}</p>
+        )}
       </div>
 
-      <div>
-        <label htmlFor="image">Imagem (URL):</label>
-        <input
-          placeholder="URL da Imagem"
-          id="image"
-          {...register("image")}
-          className="rounded-lg bg-neutral-100 p-2 w-full"
-        />
-        {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+       <div className="flex flex-col items-start gap-2">
+        <label>Imagem:</label>
+        
+        <div className="flex flex-col justify-center w-full">
+        {!imageUrl && (
+      <label htmlFor="file-upload" className="cursor-pointer">
+        <div className="flex items-center justify-center bg-neutral-800 text-white p-4 rounded-lg shadow-md  w-[300px] h-[200px] hover:bg-neutral-700">
+          <FaCloudUploadAlt className="mr-2" /> 
+          <span>Carregar Imagem</span> 
+        </div>
+      </label>)}
+      <input
+        id="file-upload"
+        type="file"
+        onChange={handleChange}
+        className="hidden"
+        accept="image/*"
+      />
+      <p className="mt-2 text-sm text-gray-500">{!imageUrl && "Nenhum arquivo selecionado"}</p>
+    </div>
+        {imageUrl && (
+          <div className="relative w-[300px] h-[200px]">
+          <Image
+            className="self-start rounded-2xl"
+            fill
+            src={imageUrl}
+            alt={"Imagem do upload"}
+          ></Image>
+          <Button onClick={() => setImageUrl(null)} className="absolute top-2 right-2 bg-neutral-800 text-white p-2 w-8 h-8 rounded shadow-2xl hover:bg-red-800 cursor-pointer">
+          <FaTrashAlt ></FaTrashAlt>
+          </Button>
+          </div>
+        )}
       </div>
 
-      {serverError && <p className="text-red-500 text-sm">{serverError}</p>}
-      {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
+      {serverError && (
+        <p className="text-red-500 text-sm">{serverError}</p>
+      )}
+      {successMessage && (
+        <p className="text-green-500 text-sm">{successMessage}</p>
+      )}
 
       <Button
         type="submit"
         className="w-full text-white p-2 rounded-lg mt-4"
-        disabled={isSubmitting} 
+        disabled={isSubmitting}
+        onClick={() => {
+          console.log(imageUrl)
+        }}
       >
         {isSubmitting ? "Enviando..." : "Enviar"}
       </Button>
     </form>
-  );  
+  );
 }
