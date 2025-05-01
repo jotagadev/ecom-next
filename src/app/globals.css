@@ -76,6 +76,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  
 }
 
 .dark {
@@ -110,6 +111,24 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+
+.scroll-custom::-webkit-scrollbar {
+  width: 6px; 
+}
+
+.scroll-custom::-webkit-scrollbar-thumb {
+  background-color: #000000; 
+  border-radius: 10px; 
+}
+
+.scroll-custom::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scroll-custom::-webkit-scrollbar-button {
+  display: none; 
 }
 
 @layer base {

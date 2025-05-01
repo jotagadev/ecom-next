@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["files.stripe.com", "www.gsuplementos.com.br"],
+    domains: ["files.stripe.com","zcjwfyavubjbouqlhpjq.supabase.co"],
   },
 
   /*Ignorando o diretório src/generated/prisma/ do eslint
