@@ -1,22 +1,22 @@
-import ProductCard from "@/components/ProductCard";
 import { stripe } from "@/lib/stripe";
+import ProductList from "@/components/ProductList";
 
 export default async function ProductsPage() {
+
+
   const products = await stripe.products.list({
     active: true,
     expand: ["data.default_price"],
   });
 
+
   return (
-    <div className="pb-8">
+    <div className="flex flex-col items-center justify-center py-2">
       <h1 className="text-3xl font-bold leading-none tracking-tight text-foreground text-center mb-8">
         Nossos produtos
       </h1>
-      <div className="grid grid-cols-1 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 sm:px-4 container w-max mx-auto gap-4 justify-center">
-        {products.data.map((product) => (
-          <ProductCard key={product.id} product={product}></ProductCard>
-        ))}
-      </div>
+      
+      <ProductList products={products.data} />
     </div>
   );
 }

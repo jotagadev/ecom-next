@@ -1,9 +1,8 @@
 import { auth } from "@/auth";
 import { AuthSession } from "@/types";
 import { stripe } from "@/lib/stripe";
-import AdminProductCard from "@/components/admin/AdminProductCard";
-import CreateProductModal from "@/components/admin/CreateProductModal";
 import { redirect } from "next/navigation";
+import AdminProductList from "@/components/admin/AdminProductList";
 
 export default async function AdminPage() {
   const session = (await auth()) as AuthSession;
@@ -25,15 +24,7 @@ export default async function AdminPage() {
         <h1 className="self-center font-bold text-xl text-shadow-2xs">
           Painel de administrador
         </h1>
-        <CreateProductModal></CreateProductModal>
-        <div className="mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center p-4 max-w-[100vw]">
-          {products.data.map((product) => (
-            <AdminProductCard
-              key={product.id}
-              product={product}
-            ></AdminProductCard>
-          ))}
-        </div>
+        <AdminProductList products={products.data} />
       </div>
     );
   } 
