@@ -51,7 +51,7 @@ export default function AdminProductCard({ product }: Props) {
   }
 
   return (
-    <Card className="relative bg-neutral-100 shadow-2xl rounded-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out flex flex-row p-0 sm:max-w-full border-0 max-w-[80vw]">
+    <Card className="relative bg-neutral-100 shadow-2xl rounded-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out flex flex-col p-0 sm:max-w-full border-0 max-w-[80vw]">
       
           <AlertDialog >
       <AlertDialogTrigger 
@@ -80,10 +80,10 @@ export default function AdminProductCard({ product }: Props) {
           <Image src={image} fill alt={product.name}></Image>
         </div>
       )}
-      <div className="flex flex-col justify-between p-4 w-50">
+      <div className="flex flex-col justify-between p-4 w-50 overflow-hidden">
         <div>
           <CardHeader>
-            <CardTitle className="text-shadow-2xs border-b border-b-gray-700/20 pb-2">
+            <CardTitle className="text-shadow-2xs border-b border-b-gray-700/20 pb-2 h-10">
               {product.name}
             </CardTitle>
           </CardHeader>
@@ -97,7 +97,7 @@ export default function AdminProductCard({ product }: Props) {
             )}
           </CardContent>
         </div>
-        <div className="flex flex-col gap-2 justify-between items-center">
+        <div className="flex flex-col gap-2 justify-between items-start ml-5 mt-5">
           <UpdateProductModal product={product}></UpdateProductModal>
           
         </div>
