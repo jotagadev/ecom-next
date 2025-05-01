@@ -23,9 +23,9 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-sm mx-auto overflow-x-hidden">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-full items-center justify-center">
 
-      <div className="">
+      <div>
         <label htmlFor="email">Email:</label>
         <input placeholder="seuemail@email.com" id="email" {...register("email")} className="rounded-lg bg-neutral-100 p-2 w-full" />
         {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}

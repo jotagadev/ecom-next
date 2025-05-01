@@ -14,12 +14,15 @@ export default function CreateProductModal () {
           Adicionar Produto <FaPlus className="size-2"></FaPlus>
         </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] w-[350px] overflow-y-auto overflow-hidden">
             <DialogHeader>
             <DialogTitle>Criar Produto</DialogTitle>
             <DialogDescription>Crie um novo produto.</DialogDescription>
             </DialogHeader>
+            
             <CreateProductForm />
+            
+            
         </DialogContent>
         </Dialog>
     );

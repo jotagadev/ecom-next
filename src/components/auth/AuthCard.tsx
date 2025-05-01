@@ -17,7 +17,7 @@ export default function AuthCard({ status } : AuthCardProps){
 
 
 return (
-    <div>
+    <div className="flex flex-col gap-4 max-w-full items-center justify-center">
         {haveAccount ? 
             <LoginForm /> :
              <RegisterForm /> }
@@ -28,7 +28,7 @@ return (
                         {haveAccount ? "Crie uma" : "Faça login"}
                     </Button>
                 </p>
-             <div className="flex flex-row gap-2 mt-5">
+             <div className="flex flex-col gap-1 sm:flex-row sm:gap-2 mt-5 ">
                   <Button variant="default" className="mt-2 bg-red-800 cursor-pointer hover:bg-red-700" onClick={() => googleLogin()}>
                     Entre com o Google <FaGoogle className="inline ml-2" />
                   </Button>

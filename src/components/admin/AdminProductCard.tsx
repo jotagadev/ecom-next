@@ -51,9 +51,9 @@ export default function AdminProductCard({ product }: Props) {
   }
 
   return (
-    <Card className="relative bg-neutral-100 shadow-2xl rounded-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out flex flex-row p-0 sm:max-w-sm border-0 flex-grow max-w-4/5 bg-red-">
+    <Card className="relative bg-neutral-100 shadow-2xl rounded-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out flex flex-row p-0 sm:max-w-full border-0 max-w-[80vw]">
       
-          <AlertDialog>
+          <AlertDialog >
       <AlertDialogTrigger 
             
             className="flex items-center cursor-pointer text-sm absolute z-10 right-0 -top-1 hover:bg-red-700 size:min bg-gray-950 p-1 rounded-sm text-white">

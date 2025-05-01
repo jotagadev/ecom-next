@@ -26,7 +26,7 @@ export default async function AdminPage() {
           Painel de administrador
         </h1>
         <CreateProductModal></CreateProductModal>
-        <div className="mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center  items-center p-4">
+        <div className="mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center p-4 max-w-[100vw]">
           {products.data.map((product) => (
             <AdminProductCard
               key={product.id}
