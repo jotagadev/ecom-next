@@ -13,7 +13,7 @@ export default function CreateProductModal () {
           Adicionar Produto 
         </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] w-[350px] overflow-y-auto overflow-hidden">
+        <DialogContent className="sm:max-w-[425px] w-[350px] overflow-y-auto max-h-[90vh] overflow-x-hidden scroll-custom">
             <DialogHeader>
             <DialogTitle>Criar Produto</DialogTitle>
             <DialogDescription>Crie um novo produto.</DialogDescription>

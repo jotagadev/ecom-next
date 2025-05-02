@@ -23,7 +23,7 @@ export default function UpdateProductModal ({ product } : Props) {
                     <FaEdit className="text-lg" /> Editar
                   </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] w-[350px]">
+        <DialogContent className="sm:max-w-[425px] w-[350px] overflow-y-auto max-h-[90vh] overflow-x-hidden scroll-custom">
             <DialogHeader>
             <DialogTitle>Editar Produto</DialogTitle>
             <DialogDescription>Edite um produto existente.</DialogDescription>

@@ -25,7 +25,7 @@ export default async function RootLayout({
     
     <html lang="pt-BR" className={inter.className}>
       <body
-        className={`h-screen bg-white w-screen max-h-screen flex flex-col`}
+        className={`h-screen bg-white w-screen max-h-screen flex flex-col overflow-x-hidden scroll-custom`}
       >
         <Navbar session={session}/>
         <main className="container mx-auto py-4">
