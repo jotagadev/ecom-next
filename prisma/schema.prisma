@@ -62,3 +62,24 @@ model VerificationToken {
  
   @@id([identifier, token])
 }
+
+model Order {
+  id        String      @id @default(cuid())
+  userId    String?     
+  stripeSessionId String @unique
+  status    String      
+  total     Float
+  createdAt DateTime    @default(now())
+  items     OrderItem[] 
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  productId String   
+  name      String
+  price     Float
+  imageUrl  String?
+  quantity  Int
+}
