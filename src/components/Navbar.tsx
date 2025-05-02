@@ -110,9 +110,9 @@ export  default function Navbar ({session} : Props)  {
 
         <Collapsible className="relative hidden lg:block">
         <CollapsibleTrigger className="group cursor-pointer"><div className=" flex-row align-center justify-center gap-4 hidden md:flex">
-        <Avatar className="h-10 w-10 rounded-full transition-shadow group-hover:shadow-md group-hover:shadow-black/20">
+        {session?.user?.image && <Avatar className="h-10 w-10 rounded-full transition-shadow group-hover:shadow-md group-hover:shadow-black/20">
           <AvatarImage src={session?.user.image}></AvatarImage>
-        </Avatar>
+        </Avatar>}
         <span className="my-auto font-semibold text-shadow-2xs group-hover:text-[neon-color] group-hover:border-b border-neutral-300">{session?.user.name}</span>
         <ChevronDown
             className="h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180 self-center"
