@@ -7,14 +7,19 @@ import { registerUserSchema } from "@/lib/zod";
 import { UserFormData } from "@/lib/zod";
 import { credentialsLogin } from "@/lib/actions/auth";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const [serverError, setServerError] = useState<string | null>(null);
-  const { register, handleSubmit, formState: { errors } } = useForm<UserFormData>({
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<UserFormData>({
     resolver: zodResolver(registerUserSchema),
   });
+  
+  const router = useRouter();
 
   const onSubmit = async (data: UserFormData) => {
+    setServerError(null);
     try{
     const response = await fetch("/api/user", {
       method: "POST",
@@ -32,6 +37,12 @@ export default function RegisterForm() {
           }
 
         await credentialsLogin(data.email, data.password);
+
+        setSuccessMessage("Usuário registrado com sucesso!");
+
+        setTimeout(() => {
+          router.refresh();
+        }, 1000);
 
         console.log("Resposta do servidor:", responseData);
     } catch (error) {
@@ -60,8 +71,9 @@ export default function RegisterForm() {
       </div>
 
       {serverError && <p className="text-red-500 text-sm">{serverError}</p>}
-      <Button type="submit" variant="secondary" className="w-full cursor-pointer mt-4">
-        Enviar
+      {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
+      <Button disabled={isSubmitting} type="submit" variant="secondary" className="w-full cursor-pointer mt-4">
+        {isSubmitting ? "Enviando..." : "Enviar"}
       </Button>
     </form>
     

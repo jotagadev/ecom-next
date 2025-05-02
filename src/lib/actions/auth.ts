@@ -7,6 +7,7 @@ import {signIn, signOut} from "@/auth";
 
 export const credentialsLogin = async (email: string, password: string) => {
     const result = await signIn("credentials", {
+        redirect: false,
         email,
         password,
     });
