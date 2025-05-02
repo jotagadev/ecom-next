@@ -24,6 +24,15 @@ import {
 } from "@/components/ui/dialog"
 import AuthCard from "./auth/AuthCard";
 
+import { ChevronDown } from "lucide-react";
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+
+
 interface Props {
   session: AuthSession| null | undefined;
 }
@@ -52,7 +61,7 @@ export  default function Navbar ({session} : Props)  {
         <Link href="/" className="text-2xl font-bold text-shadow-2xs">
           Sports Nutrition
         </Link>
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden lg:flex space-x-6">
         <Button variant={"link"}>
               <Link href="/">
                 Página inicial
@@ -83,7 +92,7 @@ export  default function Navbar ({session} : Props)  {
         
         
         <div className="flex items-center space-x-4">
-          <Link href="/checkout" className="relative md: mr-10">
+          <Link href="/checkout" className="relative lg: mr-10">
             <ShoppingCartIcon className="h-6 w-6" />
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
@@ -97,15 +106,28 @@ export  default function Navbar ({session} : Props)  {
           // Caso contrário, exibe o botão de login e registrar-se, dentro do Dialog
           }
 
-          {(session) ? (<div className=" flex-row align-center justify-center gap-4 hidden md:flex">
-        <Avatar className="w-10 h-10">
+          {(session) ? (
+
+        <Collapsible className="relative hidden lg:block">
+        <CollapsibleTrigger className="group cursor-pointer"><div className=" flex-row align-center justify-center gap-4 hidden md:flex">
+        <Avatar className="h-10 w-10 rounded-full transition-shadow group-hover:shadow-md group-hover:shadow-black/20">
           <AvatarImage src={session?.user.image}></AvatarImage>
         </Avatar>
-        <span className="my-auto font-semibold text-shadow-2xs">{session?.user.name}</span>
-        <Button className="p-1 cursor-pointer" variant={"default"} onClick={() => logout()}>Logout</Button>
-        </div>):
+        <span className="my-auto font-semibold text-shadow-2xs group-hover:text-[neon-color] group-hover:border-b border-neutral-300">{session?.user.name}</span>
+        <ChevronDown
+            className="h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180 self-center"
+          />
+        
+        </div></CollapsibleTrigger>
+        <CollapsibleContent className="animate-in fade-in slide-in-from-top-2 slide-out-to-bottom-5 absolute top-15 -right-8 bg-white shadow-md p-4 rounded-lg z-50 w-fit flex flex-col gap-2 justify-center">
+        <Link href={"/orders"}><Button className="p-1 cursor-pointer" variant={"ghost"}>Histórico de pedidos</Button></Link>
+        <Button className="p-1 cursor-pointer" variant={"ghost"} onClick={() => logout()}>Logout</Button>
+        </CollapsibleContent>
+        </Collapsible>
+          
+      ):
         (
-          <div className="hidden md:flex flex-row gap-2">
+          <div className="hidden lg:flex flex-row gap-2">
             
           <Dialog>
             <DialogTrigger asChild>
@@ -143,7 +165,7 @@ export  default function Navbar ({session} : Props)  {
           
           <Button
             variant="ghost"
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setMobileOpen((prev) => !prev)}
           >
             {mobileOpen ? (
@@ -155,8 +177,8 @@ export  default function Navbar ({session} : Props)  {
         </div>
       </div>
       {mobileOpen && (
-        <nav className="md:hidden bg-white shadow-md flex flex-col items-center transition-transform duration-300 ease-in-out">
-          <ul className="flex flex-col p-4 space-y-2">
+        <nav className="lg:hidden bg-white shadow-md flex flex-col items-center transition-transform duration-300 animate-in slide-in-from-top-2 slide-out-to-bottom-5">
+          <ul className="flex flex-col p-4">
             <li>
               <Button variant={"link"}>
               <Link href="/">
@@ -187,8 +209,17 @@ export  default function Navbar ({session} : Props)  {
                 </Button>
                 </li>
               )}
+              {session && session.user && (
+              <li>
+                <Button variant={"link"}>
+                <Link href="/orders">
+                  Histórico de pedidos
+                </Link>
+                </Button>
+                </li>
+              )}
           </ul>
-          {(session) ? (<div className=" flex-row align-center justify-center gap-4 flex md:hidden p-2">
+          {(session) ? (<div className=" flex-row align-center justify-center gap-4 flex lg:hidden p-2">
         <Avatar className="w-10 h-10">
           <AvatarImage src={session?.user.image}></AvatarImage>
         </Avatar>
