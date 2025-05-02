@@ -21,7 +21,7 @@ export default async function OrdersPage() {
 
   const userId = session?.user?.id;
 
-  const response = await fetch("http://localhost:3000/api/orders", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
