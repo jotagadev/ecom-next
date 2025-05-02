@@ -28,12 +28,12 @@ export default async function Home() {
       </Button>
     </div>
 
-    <div className="relative rounded-4xl">
+    <div className="relative rounded-4xl animate-in fade-in-100 duration-700 slide-in-from-right-8">
       {products.data[0]?.images[0] && (
         <Image
           alt="Imagem de todos os suplementos"
           src={"/suplementos 2.jpg"}
-          className=" shadow-lg object-cover -z-10 rounded-4xl"
+          className=" shadow-lg object-cover -z-10 rounded-4xl "
           width={570}
           height={200}
         />

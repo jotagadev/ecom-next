@@ -28,8 +28,8 @@ export default function ProductDetails({product} : {product: Stripe.Product}) {
 
     return (
         
-        <div className=" flex-col md:flex-row flex items-center justify-center  h-200 max-w-screen gap-10">
-            <div className='flex flex-col max-w-100'>
+        <div className=" flex-col md:flex-row flex items-center justify-center  h-200 max-w-screen gap-10 "> 
+            <div className='flex flex-col max-w-100 animate-in fade-in-100 duration-700 slide-in-from-bottom-8'>
                 <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
                 <p className="text-lg mb-4">{product.description}</p>
                 {price  && <p className="text-xl font-bold">R${(price.unit_amount || 0) / 100},00</p>}
@@ -45,7 +45,7 @@ export default function ProductDetails({product} : {product: Stripe.Product}) {
                 </div>
                 {
                   quantity > 0 && (
-                    <Link href={"/checkout"}><Button className='max-w-fit w-auto mt-5 cursor-pointer' variant={"outline"}>Finalizar compra <FaCartShopping /></Button></Link>
+                    <Link href={"/checkout"}><Button className='max-w-fit w-auto mt-5 cursor-pointer animate-in fade-in-50 duration-1000 slide-in-from-bottom-full' variant={"outline"}>Finalizar compra <FaCartShopping /></Button></Link>
                   )
                 }
             </div>

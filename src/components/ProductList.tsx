@@ -32,7 +32,7 @@ export default function ProductList({ products }: any) {
         ></input>
         <FaSearch className="text-neutral-500 text-2xl ml-2" />
       </div>
-      <div className="p-2 grid grid-cols-1 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 sm:px-4 container w-max mx-auto gap-4 justify-center">
+      <div className="p-2 grid grid-cols-1 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 sm:px-4 container w-max mx-auto gap-4 justify-center animate-in fade-in-100 duration-700 slide-in-from-bottom-2">
         {!filteredProducts
           ? products.map((product: any) => (
               <ProductCard key={product.id} product={product}></ProductCard>
