@@ -8,3 +8,12 @@ export interface AuthSession {
     };
     expires: string; 
 }
+
+export interface UserProfile {
+    
+        id: string;
+        email: string;
+        name: string;
+        image: string;
+    
+}
